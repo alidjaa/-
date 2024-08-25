@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معلومات اللاعب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+            background: url('https://your-server.com/images/soccer-field.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            padding: 20px;
+        }
+        .player-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: black;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 50px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+        .player-image {
+            width: 250px;
+            height: 250px;
+            background-color: #ddd;
+            margin: 20px auto;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 4px solid #000;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        td {
+            background-color: #fafafa;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>معلومات اللاعب</h1>
+    <div class="player-card">
+        <div class="player-image" id="playerImage"></div>
+        <table>
+            <tr>
+                <th>رمز</th>
+                <th>المعلومة</th>
+            </tr>
+            <tr>
+                <td><img src="https://your-server.com/images/name-icon.png" alt="اسم" class="icon"></td>
+                <td id="playerName"></td>
+            </tr>
+            <tr>
+                <td><img src="https://your-server.com/images/position-icon.png" alt="مركز" class="icon"></td>
+                <td id="playerPosition"></td>
+            </tr>
+            <tr>
+                <td><img src="https://your-server.com/images/number-icon.png" alt="رقم" class="icon"></td>
+                <td id="playerNumber"></td>
+            </tr>
+        </table>
+        <a href="team.html" class="button">عرض الفريق ومعلوماتي في الملعب</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const playerInfo = JSON.parse(localStorage.getItem('playerInfo'));
+            if (playerInfo) {
+                document.getElementById('playerName').textContent = `${playerInfo.name} ${playerInfo.surname}`;
+                document.getElementById('playerPosition').textContent = `المركز: ${playerInfo.position}`;
+                document.getElementById('playerNumber').textContent = `الرقم: ${playerInfo.number}`;
+
+                const playerImage = document.getElementById('playerImage');
+                const imageUrl = playerInfo.image || 'https://via.placeholder.com/250'; // Default image URL
+                playerImage.style.backgroundImage = `url('${imageUrl}')`;
+            } else {
+                document.body.innerHTML = '<h1>لم يتم العثور على بيانات اللاعب</h1>';
+            }
+        });
+    </script>
+</body>
+</html>
